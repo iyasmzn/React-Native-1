@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StatusBar, Image, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, StatusBar, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native'
 
 const PlanningItem = (props) => (
   <View style={styles.planningItem}>
@@ -10,6 +10,15 @@ const PlanningItem = (props) => (
 )
 
 const App = () => {
+
+  const planningItems = [
+    { amount: 20000, day: 20 },
+    { amount: 50000, day: 40 },
+    { amount: 30000, day: 30 },
+    { amount: 10000, day: 50 },
+    { amount: 90000, day: 70 },
+  ]
+  
   return (
     <>
       <StatusBar translucent backgroundColor="transparent" />
@@ -38,13 +47,13 @@ const App = () => {
             <Text style={styles.planningTitle}>Planning Ahead</Text>
             <Text>- $5,819.92</Text>
           </View>
-          <ScrollView horizontal>
-            <PlanningItem amount="- 150.52" day="2" />
-            <PlanningItem amount="- 150.52" day="27" />
-            <PlanningItem amount="- 150.52" day="12" />
-            <PlanningItem amount="- 150.52" day="69" />
-            <PlanningItem amount="- 150.52" day="11" />
-          </ScrollView>
+          <FlatList 
+            horizontal
+            data={planningItems}
+            renderItem={({item}) => (
+              <PlanningItem amount={item.amount} day={item.day} />
+            )}
+          />
         </View>
 
       </ScrollView>
